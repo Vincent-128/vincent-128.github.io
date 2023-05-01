@@ -19,13 +19,14 @@
   onDestroy(unsubscribe)
 </script>
 
-<table>
+<table class="team">
   <tr>
+    <td />
     <td class="name">{name}</td>
     <td />
     <td>T</td>
-    <td>G</td>
-    <td>A</td>
+    <td>Total</td>
+    <td>Live</td>
   </tr>
 
   {#each picks[name].skaters as id (id)}
@@ -55,9 +56,12 @@
 
 <style>
   td {
-    font-weight: 900;
+    font-weight: bolder;
     padding: 8px 4px 0 4px;
     text-align: center;
+  }
+  .team {
+    width: 400px;
   }
   .name {
     text-align: start;

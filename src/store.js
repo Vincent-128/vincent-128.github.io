@@ -13,6 +13,19 @@ players.forEach(p => {
 const labels = []
 const datasets = []
 
+const test = async () => {
+  const updates = await Promise.all(
+    players.map(async player => {
+      const { id, team, type } = player
+      const res = await fetch('https://statsapi.web.nhl.com/api/v1/people/' + id)
+      const json = await res.json()
+      const { firstName, lastName, currentTeam } = json.people[0]
+      return { id, team, type, firstName, lastName, id: currentTeam.id }
+    })
+  )
+}
+test()
+
 export const playerData = writable(players)
 export const chartData = writable({ labels: [], datasets: [] })
 
