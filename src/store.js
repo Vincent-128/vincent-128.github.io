@@ -5,13 +5,27 @@ import { picks } from './data/picks.js'
 players.forEach(p => {
   if (p.type === 'Goalie') {
     p.stats = { w: 0, s: 0, g: 0, a: 0 }
+    p.record = [{ g: 0, a: 0 }]
   } else {
     p.stats = { g: 0, a: 0 }
+    p.record = [{ g: 0, a: 0 }]
   }
 })
 
 const labels = []
 const datasets = []
+
+const test = async () => {
+  const updates = await Promise.all(
+    players.map(async player => {
+      const { id, team, type } = player
+      const res = await fetch('https://statsapi.web.nhl.com/api/v1/people/' + id)
+      const json = await res.json()
+      const { firstName, lastName, currentTeam } = json.people[0]
+      return { id, team, type, firstName, lastName, id: currentTeam.id }
+    })
+  )
+}
 
 export const playerData = writable(players)
 export const chartData = writable({ labels: [], datasets: [] })
@@ -27,12 +41,12 @@ const getGoalieStats = async id => {
 
     if (game.isWin) {
       goalie.stats.w += 1
-      goalie.record[index] += 1
+      goalie.record[index].w = 1
     }
 
     if (game.stat.shutouts) {
       goalie.stats.s += 1
-      goalie.record[index] += 2
+      goalie.record[index].s = 2
     }
   })
 }
@@ -43,13 +57,13 @@ const main = async () => {
   const json = await res.json()
 
   players.forEach(p => {
-    p.record = new Array(json.dates.length).fill(0)
+    p.record = new Array(json.dates.length).fill(0).map(() => ({ g: 0, a: 0, w: 0, s: 0 }))
   })
 
   const addPoint = (id, type, index) => {
     const player = players.find(p => p.id === id)
     if (player) {
-      player.record[index] += 1
+      player.record[index][type] += 1
       player.stats[type] += 1
     }
   }
@@ -77,12 +91,12 @@ const main = async () => {
 
     picks[name].skaters.forEach(id => {
       const player = players.find(p => p.id === id)
-      player.record.forEach((p, i) => (dataset.data[i] += p))
+      player.record.forEach((p, i) => (dataset.data[i] += p.g + p.a))
     })
 
     picks[name].goalies.forEach(id => {
       const player = players.find(p => p.id === id)
-      player.record.forEach((p, i) => (dataset.data[i] += p))
+      player.record.forEach((p, i) => (dataset.data[i] += p.g + p.a + p.w + p.s))
     })
 
     for (let i = 1; i < dataset.data.length; i++) {

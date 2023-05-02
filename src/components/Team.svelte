@@ -19,13 +19,19 @@
   onDestroy(unsubscribe)
 </script>
 
-<table>
+<table class="team">
   <tr>
-    <td class="name">{name}</td>
-    <td />
-    <td>T</td>
-    <td>G</td>
-    <td>A</td>
+    <td rowspan="2" colspan="3" class="name">{name}</td>
+    <td rowspan="2" class="center">P</td>
+    <td colspan="2" class="center">Total</td>
+    <td colspan="2" class="center">Live</td>
+  </tr>
+
+  <tr>
+    <td class="center">G</td>
+    <td class="center">A</td>
+    <td class="center">G</td>
+    <td class="center">A</td>
   </tr>
 
   {#each picks[name].skaters as id (id)}
@@ -35,11 +41,12 @@
   <tr>
     <td />
     <td />
-    <td>T</td>
-    <td>G</td>
-    <td>A</td>
-    <td>W</td>
-    <td>S</td>
+    <td />
+    <td class="center">P</td>
+    <td class="center">W</td>
+    <td class="center">S</td>
+    <td class="center">G</td>
+    <td class="center">A</td>
   </tr>
 
   {#each picks[name].goalies as id (id)}
@@ -49,17 +56,17 @@
   <tr>
     <td />
     <td />
-    <td>{total}</td>
+    <td />
+    <td colspan="4">{total}</td>
   </tr>
 </table>
 
 <style>
   td {
-    font-weight: 900;
-    padding: 8px 4px 0 4px;
-    text-align: center;
+    font-weight: bolder;
+    padding: 0;
   }
-  .name {
-    text-align: start;
+  .center {
+    text-align: center;
   }
 </style>

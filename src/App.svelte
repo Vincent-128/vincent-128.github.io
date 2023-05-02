@@ -5,23 +5,20 @@
   const names = Object.keys(picks).sort()
 </script>
 
-<div>
-  <div class="teams">
-    {#each names as name (name)}
-      <Team {name} />
-    {/each}
-  </div>
-  <Chart />
+<div class="teams">
+  {#each names as name (name)}
+    <Team {name} />
+  {/each}
 </div>
+<Chart />
 
 <style>
   .teams {
-    width: 1200px;
+    gap: 30px;
     margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 50px;
-    column-gap: 100px;
-    padding-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    justify-content: center;
   }
 </style>
