@@ -26,8 +26,8 @@
   <td width="20px" class="stat">{skater.stats.g + skater.stats.a}</td>
   <td width="20px" class="stat">{skater.stats.g}</td>
   <td width="20px" class="stat">{skater.stats.a}</td>
-  <td width="20px" class="stat">{skater.record.at(-1).g}</td>
-  <td width="20px" class="stat">{skater.record.at(-1).a}</td>
+  <td width="20px" class="stat">{skater.record[skater.record.length - 1].g}</td>
+  <td width="20px" class="stat">{skater.record[skater.record.length - 1].a}</td>
 </tr>
 
 <style>
