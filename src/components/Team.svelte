@@ -12,7 +12,7 @@
   const unsubscribe = chartData.subscribe(value => {
     const test = value.datasets.find(p => p.label === name)
     if (test) {
-      total = test.data.at(-1)
+      total = test.data[test.data.length - 1]
     }
   })
 
