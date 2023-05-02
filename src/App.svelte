@@ -14,10 +14,11 @@
 
 <style>
   .teams {
+    gap: 30px;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    max-width: 1300px;
-    justify-content: space-evenly;
+    max-width: 1200px;
+    justify-content: center;
   }
 </style>

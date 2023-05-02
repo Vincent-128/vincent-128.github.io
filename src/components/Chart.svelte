@@ -16,16 +16,24 @@
     chart = new Chart(ctx.getContext('2d'), {
       type: 'line',
       data: { labels: [], datasets: [] },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
     })
   })
 </script>
 
-<canvas class="chart" bind:this={ctx} />
+<div class="container" style="position: relative">
+  <canvas class="chart" bind:this={ctx} />
+</div>
 
 <style>
-  .chart {
-    max-width: 1200px;
-    width: 100%;
+  .container {
+    padding: 20px;
+    position: relative;
+    max-width: 1100px;
+    height: 50vh;
     margin: auto;
   }
 </style>

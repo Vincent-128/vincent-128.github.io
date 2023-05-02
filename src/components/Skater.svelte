@@ -13,34 +13,27 @@
 </script>
 
 <tr>
-  <td>
-    <img class="icon" src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/{skater.teamId}.svg" alt="team icon"/>
+  <td width="45px" style="padding-top: 5px">
+    <img src="https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/{skater.teamId}.svg" alt="team icon" />
   </td>
-  <td>
+
+  <td width="130px">
     <div>{skater.firstName}</div>
     <div class="last">{skater.lastName}</div>
   </td>
-  <td>{skater.team}</td>
-  <td class="stat">{skater.stats.g + skater.stats.a}</td>
-  <td class="stat">
-    <div>G: {skater.stats.g}</div>
-    <div>A: {skater.stats.a}</div>
-  </td>
-  <td class="stat">
-    <div>G: {skater.stats.g}</div>
-    <div>A: {skater.stats.a}</div>
-  </td>
+
+  <td width="35px">{skater.team}</td>
+  <td width="20px" class="stat">{skater.stats.g + skater.stats.a}</td>
+  <td width="20px" class="stat">{skater.stats.g}</td>
+  <td width="20px" class="stat">{skater.stats.a}</td>
+  <td width="20px" class="stat">{skater.record.at(-1).g}</td>
+  <td width="20px" class="stat">{skater.record.at(-1).a}</td>
 </tr>
 
 <style>
   td {
-    padding: 4px;
+    padding: 0;
   }
-
-  .icon {
-    height: 30px;
-  }
-
   .stat {
     text-align: center;
   }
